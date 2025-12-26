@@ -9,6 +9,23 @@ import java.io.*;
 /**
  * ElectionController manages the core logic of the application,
  * including data storage, searching, sorting, and file persistence.
+ * Searching Algorithms
+ * Method: searchPoliticianByID(String id)
+ *Method: searchPoliticianByName(String name)
+ * Method: searchElectionByID(String id)
+ * Algorithm: Custom Hashing (O(1)) via CustomHashTable
+ * Method: searchPoliticianByPartialName(String partName)
+ * Algorithm: Linear Search
+ * Method: filterPoliticiansByLocation(String county)
+ * Algorithm: Linear Search
+ * Method: filterPoliticiansByParty(String party)
+ * Algorithm: Linear Search (O(n))
+ *
+ * Sorting Algorithms
+ * Method: sortCandidatesByVotes(SimpleList<CandidateEntry> list)
+ * Algorithm: Selection Sort (Descending Order)
+ * Method: sortPoliticiansByName()
+ * Algorithm: Selection Sort (Ascending Order)
  */
 public class ElectionController {
     // 1. MASTER LISTS (Used for data persistence, filtering, and sorting)
