@@ -4,7 +4,7 @@ import org.example.controller.ElectionController;
 import org.example.model.*;
 import org.example.util.SimpleList;
 import java.util.Scanner;
-
+//ki
 public class MainApp {
     private ElectionController controller;
     private Scanner input;

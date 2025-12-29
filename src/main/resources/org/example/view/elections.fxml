@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.ui.ElectionsController">
+
+    <!-- LEFT: ELECTION LIST (TABLE) -->
+    <!-- LEFT: ELECTION LIST (TABLE) -->
+    <left>
+        <TableView fx:id="electionsTable" prefWidth="360">
+            <columns>
+                <TableColumn fx:id="elIdCol" text="ID" prefWidth="70"/>
+                <TableColumn fx:id="elYearCol" text="Year" prefWidth="60"/>
+                <TableColumn fx:id="elTypeCol" text="Type" prefWidth="90"/>
+                <TableColumn fx:id="elLocationCol" text="Location" prefWidth="90"/>
+                <TableColumn fx:id="elSeatsCol" text="Seats" prefWidth="50"/>
+            </columns>
+        </TableView>
+    </left>
+
+    <!-- CENTER: CANDIDATES -->
+    <center>
+        <TableView fx:id="candidatesTable">
+            <columns>
+                <TableColumn fx:id="candIdCol" text="ID" prefWidth="100"/>
+                <TableColumn fx:id="candNameCol" text="Name" prefWidth="180"/>
+                <TableColumn fx:id="candPartyCol" text="Party" prefWidth="140"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- RIGHT: POLITICIAN DETAILS -->
+    <right>
+        <VBox spacing="10" prefWidth="260">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <ImageView fx:id="photoView"
+                       fitWidth="220"
+                       fitHeight="160"
+                       preserveRatio="true"/>
+
+            <Label fx:id="nameLabel"/>
+            <Label fx:id="dobLabel"/>
+            <Label fx:id="partyLabel"/>
+            <Label fx:id="countyLabel"/>
+        </VBox>
+    </right>
+
+</BorderPane>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="org.example.ui.PoliticiansController">
+
+    <!-- TOP: SEARCH + FILTER -->
+    <top>
+        <VBox spacing="8">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <!-- SEARCH -->
+            <HBox spacing="10">
+                <Label text="Search:"/>
+                <TextField fx:id="searchField"
+                           promptText="Enter name..."
+                           onKeyReleased="#onSearch"/>
+            </HBox>
+
+            <!-- FILTER -->
+            <HBox spacing="10">
+                <Label text="Filter:"/>
+                <ChoiceBox fx:id="filterTypeBox"/>
+                <TextField fx:id="filterValueField"
+                           promptText="Party or County"/>
+                <Button text="Apply" onAction="#applyFilter"/>
+                <Button text="Clear" onAction="#clearFilter"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- CENTER -->
+    <center>
+        <SplitPane dividerPositions="0.35">
+
+            <!-- LEFT: POLITICIANS TABLE -->
+            <TableView fx:id="table">
+                <columns>
+                    <TableColumn fx:id="idCol" text="ID" prefWidth="120"/>
+                    <TableColumn fx:id="nameCol" text="Name" prefWidth="240"/>
+                </columns>
+            </TableView>
+
+            <!-- RIGHT: DETAILS -->
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+
+                <ImageView fx:id="photoView"
+                           preserveRatio="true"
+                           fitHeight="300"
+                           VBox.vgrow="ALWAYS"/>
+
+                <Label fx:id="nameLabel" text="Name:"/>
+                <Label fx:id="dobLabel" text="DOB:"/>
+                <Label fx:id="partyLabel" text="Party:"/>
+                <Label fx:id="countyLabel" text="County:"/>
+            </VBox>
+
+        </SplitPane>
+    </center>
+
+</BorderPane>
