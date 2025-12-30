@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.ui.AddElectionController"
+      spacing="10">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Add Election" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="idField" promptText="Election ID"/>
+    <TextField fx:id="typeField" promptText="Type (e.g. General, Local)"/>
+    <TextField fx:id="yearField" promptText="Year"/>
+    <TextField fx:id="locationField" promptText="Location"/>
+    <TextField fx:id="seatsField" promptText="Number of seats"/>
+
+    <HBox spacing="10">
+        <Button text="Save" onAction="#onSave"/>
+        <Button text="Cancel" onAction="#onCancel"/>
+    </HBox>
+
+</VBox>

@@ -50,8 +50,7 @@ public class Election implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + id + " | Type: " + type + " | Year: " + year +
-                " | Location: " + location + " | Seats: " + seats;
+        return id + " (" + year + ", " + type + ")";
     }
 
     // Standard Getters and Setters

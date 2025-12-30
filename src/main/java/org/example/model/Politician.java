@@ -26,8 +26,7 @@ public class Politician implements Serializable {
 
     @Override
     public String toString() {
-        return "ID: " + id + " | Name: " + name + " | Party: " + currentParty +
-                " | County: " + homeCounty + " | Image: " + imageUrl;
+        return id + " - " + name;
     }
 
     // --- Getters and Setters (Required for XML and GUI) ---
@@ -49,4 +48,6 @@ public class Politician implements Serializable {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+
 }

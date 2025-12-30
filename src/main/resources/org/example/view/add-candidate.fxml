@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.ui.AddCandidateController">
+
+    <padding>
+        <Insets top="15" right="15" bottom="15" left="15"/>
+    </padding>
+
+    <Label text="Add Candidate"/>
+
+    <ComboBox fx:id="politicianBox" promptText="Select Politician"/>
+    <ComboBox fx:id="electionBox" promptText="Select Election"/>
+
+    <TextField fx:id="partyField" promptText="Party at election"/>
+    <TextField fx:id="votesField" promptText="Votes"/>
+
+    <HBox spacing="10">
+        <Button text="Save" onAction="#onSave"/>
+        <Button text="Cancel" onAction="#onCancel"/>
+    </HBox>
+
+</VBox>

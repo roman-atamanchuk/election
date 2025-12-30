@@ -20,6 +20,9 @@
             <Button text="Politicians" onAction="#showPoliticians"/>
             <Button text="Elections" onAction="#showElections"/>
             <Button text="Results" onAction="#showResults"/>
+
+            <!-- ✅ ADD BUTTON -->
+            <Button text="Add" onAction="#onAdd"/>
         </HBox>
     </top>
 
