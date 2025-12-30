@@ -9,8 +9,7 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.ui.ElectionsController">
 
-    <!-- LEFT: ELECTION LIST (TABLE) -->
-    <!-- LEFT: ELECTION LIST (TABLE) -->
+    <!-- LEFT: ELECTION LIST -->
     <left>
         <TableView fx:id="electionsTable" prefWidth="360">
             <columns>

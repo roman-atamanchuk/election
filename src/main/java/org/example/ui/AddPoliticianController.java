@@ -18,22 +18,49 @@ public class AddPoliticianController {
     private final ElectionController controller =
             MainViewController.getController();
 
+    // 🔹 NEW: used for EDIT mode
+    private Politician editingPolitician = null;
+
+    // ================= EDIT MODE =================
+    public void setPolitician(Politician p) {
+        this.editingPolitician = p;
+
+        idField.setText(p.getId());
+        idField.setDisable(true); // ID must NOT change
+
+        nameField.setText(p.getName());
+        dobField.setText(p.getDateOfBirth());
+        partyField.setText(p.getCurrentParty());
+        countyField.setText(p.getHomeCounty());
+        imageField.setText(p.getImageUrl());
+    }
+
+    // ================= SAVE =================
     @FXML
     private void onSave() {
 
-        Politician p = new Politician(
-                idField.getText().trim(),
-                nameField.getText().trim(),
-                dobField.getText().trim(),
-                partyField.getText().trim(),
-                countyField.getText().trim(),
-                imageField.getText().trim()
-        );
+        if (editingPolitician == null) {
+            // ---------- ADD NEW ----------
+            Politician p = new Politician(
+                    idField.getText().trim(),
+                    nameField.getText().trim(),
+                    dobField.getText().trim(),
+                    partyField.getText().trim(),
+                    countyField.getText().trim(),
+                    imageField.getText().trim()
+            );
+            controller.addPolitician(p);
 
-        // ✅ add to memory
-        controller.addPolitician(p);
+        } else {
+            // ---------- UPDATE EXISTING ----------
+            editingPolitician.setName(nameField.getText().trim());
+            editingPolitician.setDateOfBirth(dobField.getText().trim());
+            editingPolitician.setCurrentParty(partyField.getText().trim());
+            editingPolitician.setHomeCounty(countyField.getText().trim());
+            editingPolitician.setImageUrl(imageField.getText().trim());
+        }
 
-        // ✅ SAVE TO XML (THIS WAS MISSING)
+        // ---------- SAVE TO XML ----------
         try {
             controller.save("data.xml");
         } catch (Exception e) {

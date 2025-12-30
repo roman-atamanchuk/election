@@ -2,9 +2,13 @@ package org.example.ui;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import org.example.controller.ElectionController;
 import org.example.model.Politician;
 import org.example.util.SimpleList;
@@ -37,20 +41,19 @@ public class PoliticiansController {
 
         // TABLE BINDINGS
         idCol.setCellValueFactory(d ->
-                new javafx.beans.property.SimpleStringProperty(
-                        d.getValue().getId()
-                )
+                new javafx.beans.property.SimpleStringProperty(d.getValue().getId())
         );
 
         nameCol.setCellValueFactory(d ->
-                new javafx.beans.property.SimpleStringProperty(
-                        d.getValue().getName()
-                )
+                new javafx.beans.property.SimpleStringProperty(d.getValue().getName())
         );
 
         // FILTER OPTIONS
         filterTypeBox.getItems().addAll("Party", "County");
         filterTypeBox.setValue("Party");
+
+        // RIGHT-CLICK MENU
+        addContextMenu();
 
         // LOAD DATA
         loadPoliticians();
@@ -61,7 +64,32 @@ public class PoliticiansController {
                 .addListener((obs, o, n) -> showDetails(n));
     }
 
-    // ---------- LOAD ALL ----------
+    // ================= CONTEXT MENU =================
+    private void addContextMenu() {
+
+        table.setRowFactory(tv -> {
+            TableRow<Politician> row = new TableRow<>();
+
+            MenuItem edit = new MenuItem("Edit");
+            MenuItem delete = new MenuItem("Delete");
+
+            edit.setOnAction(e -> editPolitician(row.getItem()));
+            delete.setOnAction(e -> deletePolitician(row.getItem()));
+
+            ContextMenu menu = new ContextMenu(edit, delete);
+
+            row.contextMenuProperty().bind(
+                    javafx.beans.binding.Bindings
+                            .when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(menu)
+            );
+
+            return row;
+        });
+    }
+
+    // ================= LOAD =================
     private void loadPoliticians() {
         table.getItems().clear();
 
@@ -77,11 +105,10 @@ public class PoliticiansController {
         }
     }
 
-    // ---------- SEARCH ----------
+    // ================= SEARCH =================
     @FXML
     private void onSearch() {
         String text = searchField.getText().trim();
-
         table.getItems().clear();
 
         if (text.isEmpty()) {
@@ -101,7 +128,7 @@ public class PoliticiansController {
         }
     }
 
-    // ---------- FILTER ----------
+    // ================= FILTER =================
     @FXML
     private void applyFilter() {
         String value = filterValueField.getText().trim();
@@ -109,16 +136,12 @@ public class PoliticiansController {
 
         table.getItems().clear();
 
-        if (filterTypeBox.getValue().equals("Party")) {
-            var list = controller.filterPoliticiansByParty(value);
-            for (int i = 0; i < list.size(); i++) {
-                table.getItems().add(list.get(i));
-            }
-        } else {
-            var list = controller.filterPoliticiansByLocation(value);
-            for (int i = 0; i < list.size(); i++) {
-                table.getItems().add(list.get(i));
-            }
+        var list = filterTypeBox.getValue().equals("Party")
+                ? controller.filterPoliticiansByParty(value)
+                : controller.filterPoliticiansByLocation(value);
+
+        for (int i = 0; i < list.size(); i++) {
+            table.getItems().add(list.get(i));
         }
 
         if (!table.getItems().isEmpty()) {
@@ -135,7 +158,7 @@ public class PoliticiansController {
         loadPoliticians();
     }
 
-    // ---------- DETAILS ----------
+    // ================= DETAILS =================
     private void showDetails(Politician p) {
         if (p == null) {
             clearDetails();
@@ -160,5 +183,50 @@ public class PoliticiansController {
         partyLabel.setText("Party:");
         countyLabel.setText("County:");
         photoView.setImage(null);
+    }
+
+    // ================= DELETE =================
+    private void deletePolitician(Politician p) {
+        if (p == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Delete " + p.getName() + "?");
+
+        alert.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.OK) {
+                controller.deletePolitician(p.getId());
+                try {
+                    controller.save("data.xml");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                loadPoliticians();
+            }
+        });
+    }
+
+    // ================= EDIT =================
+    private void editPolitician(Politician p) {
+        if (p == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org/example/view/add-politician.fxml")
+            );
+
+            Parent root = loader.load();
+            AddPoliticianController c = loader.getController();
+            c.setPolitician(p);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            controller.save("data.xml");
+            loadPoliticians();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

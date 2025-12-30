@@ -4,22 +4,25 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<VBox xmlns="http://javafx.com/javafx/21"
+<VBox spacing="10"
+      xmlns="http://javafx.com/javafx/21"
       xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="org.example.ui.AddElectionController"
-      spacing="10">
+      fx:controller="org.example.ui.AddElectionController">
 
     <padding>
         <Insets top="15" right="15" bottom="15" left="15"/>
     </padding>
 
-    <Label text="Add Election" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+    <Label text="Add / Edit Election"/>
 
     <TextField fx:id="idField" promptText="Election ID"/>
-    <TextField fx:id="typeField" promptText="Type (e.g. General, Local)"/>
+
+    <!-- 🔹 FIXED -->
+    <ChoiceBox fx:id="typeBox"/>
+
     <TextField fx:id="yearField" promptText="Year"/>
     <TextField fx:id="locationField" promptText="Location"/>
-    <TextField fx:id="seatsField" promptText="Number of seats"/>
+    <TextField fx:id="seatsField" promptText="Seats"/>
 
     <HBox spacing="10">
         <Button text="Save" onAction="#onSave"/>

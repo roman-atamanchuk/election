@@ -1,11 +1,14 @@
 package org.example.ui;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.beans.property.SimpleStringProperty;
-
+import javafx.stage.Stage;
 import org.example.controller.ElectionController;
 import org.example.model.*;
 
@@ -32,106 +35,103 @@ public class ElectionsController {
     @FXML private Label partyLabel;
     @FXML private Label countyLabel;
 
-    // Shared logic controller
     private final ElectionController controller =
             MainViewController.getController();
 
     @FXML
     public void initialize() {
 
-        /* =====================================================
-         * LEFT TABLE – ELECTIONS
-         * ===================================================== */
+        /* ================= LEFT TABLE ================= */
 
         elIdCol.setCellValueFactory(d ->
                 new SimpleStringProperty(d.getValue().getId()));
 
         elYearCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        String.valueOf(d.getValue().getYear())));
+                new SimpleStringProperty(String.valueOf(d.getValue().getYear())));
 
         elTypeCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        d.getValue().getType().toString()));
+                new SimpleStringProperty(d.getValue().getType().toString()));
 
         elLocationCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        d.getValue().getLocation()));
+                new SimpleStringProperty(d.getValue().getLocation()));
 
         elSeatsCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        String.valueOf(d.getValue().getSeats())));
+                new SimpleStringProperty(String.valueOf(d.getValue().getSeats())));
 
-        // Load elections from SimpleList
-        electionsTable.getItems().clear();
-        for (int i = 0; i < controller.getElections().size(); i++) {
-            electionsTable.getItems().add(
-                    controller.getElections().get(i)
-            );
-        }
+        addElectionContextMenu();
+        loadElections();
 
-        // Election selection listener
         electionsTable.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((obs, oldVal, newVal) ->
-                        loadElection(newVal));
+                .addListener((obs, o, n) -> loadElection(n));
 
-        /* =====================================================
-         * CENTER TABLE – CANDIDATES
-         * ===================================================== */
+        /* ================= CENTER TABLE ================= */
 
         candIdCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        d.getValue().getPoliticianId()));
+                new SimpleStringProperty(d.getValue().getPoliticianId()));
 
         candPartyCol.setCellValueFactory(d ->
-                new SimpleStringProperty(
-                        d.getValue().getPartyAtElection()));
+                new SimpleStringProperty(d.getValue().getPartyAtElection()));
 
         candNameCol.setCellValueFactory(d -> {
-            Politician p =
-                    controller.searchPoliticianByID(
-                            d.getValue().getPoliticianId()
-                    );
+            Politician p = controller.searchPoliticianByID(
+                    d.getValue().getPoliticianId());
             return new SimpleStringProperty(
-                    p != null ? p.getName() : "Unknown"
-            );
+                    p != null ? p.getName() : "Unknown");
         });
 
-        // Candidate selection listener
         candidatesTable.getSelectionModel()
                 .selectedItemProperty()
-                .addListener((obs, oldVal, newVal) ->
-                        showPoliticianDetails(newVal));
-
-        /* =====================================================
-         * AUTO-SELECT FIRST ELECTION
-         * ===================================================== */
+                .addListener((obs, o, n) -> showPoliticianDetails(n));
 
         if (!electionsTable.getItems().isEmpty()) {
             electionsTable.getSelectionModel().select(0);
-        } else {
-            clearPoliticianDetails();
         }
     }
 
-    /* =========================================================
-     * LOAD ELECTION → CENTER TABLE
-     * ========================================================= */
+    /* ================= CONTEXT MENU ================= */
+
+    private void addElectionContextMenu() {
+        electionsTable.setRowFactory(tv -> {
+            TableRow<Election> row = new TableRow<>();
+
+            MenuItem edit = new MenuItem("Edit");
+            MenuItem delete = new MenuItem("Delete");
+
+            edit.setOnAction(e -> editElection(row.getItem()));
+            delete.setOnAction(e -> deleteElection(row.getItem()));
+
+            ContextMenu menu = new ContextMenu(edit, delete);
+
+            row.contextMenuProperty().bind(
+                    javafx.beans.binding.Bindings
+                            .when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(menu)
+            );
+            return row;
+        });
+    }
+
+    /* ================= LOAD ================= */
+
+    private void loadElections() {
+        electionsTable.getItems().clear();
+        for (int i = 0; i < controller.getElections().size(); i++) {
+            electionsTable.getItems().add(
+                    controller.getElections().get(i));
+        }
+    }
 
     private void loadElection(Election e) {
         if (e == null) return;
 
         candidatesTable.getItems().clear();
-        candidatesTable.getSelectionModel().clearSelection();
-
         for (int i = 0; i < e.getCandidateEntries().size(); i++) {
             candidatesTable.getItems().add(
-                    e.getCandidateEntries().get(i)
-            );
+                    e.getCandidateEntries().get(i));
         }
 
-        // Auto-select first candidate
         if (!candidatesTable.getItems().isEmpty()) {
             candidatesTable.getSelectionModel().select(0);
         } else {
@@ -139,9 +139,7 @@ public class ElectionsController {
         }
     }
 
-    /* =========================================================
-     * RIGHT PANEL – POLITICIAN DETAILS
-     * ========================================================= */
+    /* ================= RIGHT PANEL ================= */
 
     private void showPoliticianDetails(CandidateEntry ce) {
         if (ce == null) {
@@ -150,9 +148,7 @@ public class ElectionsController {
         }
 
         Politician p =
-                controller.searchPoliticianByID(
-                        ce.getPoliticianId()
-                );
+                controller.searchPoliticianByID(ce.getPoliticianId());
 
         if (p == null) {
             clearPoliticianDetails();
@@ -177,5 +173,51 @@ public class ElectionsController {
         partyLabel.setText("Party:");
         countyLabel.setText("County:");
         photoView.setImage(null);
+    }
+
+    /* ================= DELETE ================= */
+
+    private void deleteElection(Election e) {
+        if (e == null) return;
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Delete election " + e.getId() + "?");
+
+        alert.showAndWait().ifPresent(btn -> {
+            if (btn == ButtonType.OK) {
+                controller.deleteElection(e.getId());
+                try {
+                    controller.save("data.xml");
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                loadElections();
+            }
+        });
+    }
+
+    /* ================= EDIT ================= */
+
+    private void editElection(Election e) {
+        if (e == null) return;
+
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/org/example/view/add-election.fxml"));
+
+            Parent root = loader.load();
+            AddElectionController c = loader.getController();
+            c.setElection(e);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+
+            controller.save("data.xml");
+            loadElections();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
