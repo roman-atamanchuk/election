@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.8" class="java.beans.XMLDecoder">
+ <object class="org.example.util.SimpleList" id="SimpleList0">
+  <void property="data">
+   <void index="0">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>Green</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1978-04-12</string>
+     </void>
+     <void property="homeCounty">
+      <string>Waterford</string>
+     </void>
+     <void property="id">
+      <string>P1</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://www.rte.ie/images/0020f578-500.jpg</string>
+     </void>
+     <void property="name">
+      <string>Alice Abbott</string>
+     </void>
+    </object>
+   </void>
+   <void index="1">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>Labour</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1969-11-02</string>
+     </void>
+     <void property="homeCounty">
+      <string>Dublin</string>
+     </void>
+     <void property="id">
+      <string>P2</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://d3i6fh83elv35t.cloudfront.net/static/2024/03/2024-03-24T164726Z_1587292420_RC2FS6AREKJC_RTRMADP_3_IRELAND-POLITICS-1024x683.jpg</string>
+     </void>
+     <void property="name">
+      <string>Bob Barry</string>
+     </void>
+    </object>
+   </void>
+   <void index="2">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>Fianna Fail</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1982-06-19</string>
+     </void>
+     <void property="homeCounty">
+      <string>Cork</string>
+     </void>
+     <void property="id">
+      <string>P3</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://www.democraticaudit.com/wp-content/uploads/2017/04/31640164424_677813ffe2_o.jpg</string>
+     </void>
+     <void property="name">
+      <string>Charlie Cody</string>
+     </void>
+    </object>
+   </void>
+   <void index="3">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>Fine Gael</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1975-01-30</string>
+     </void>
+     <void property="homeCounty">
+      <string>Galway</string>
+     </void>
+     <void property="id">
+      <string>P4</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://dims.apnews.com/dims4/default/8543cc0/2147483647/strip/true/crop/3000x1915+0+0/resize/599x382!/quality/90/?url=https%3A%2F%2Fstorage.googleapis.com%2Fafs-prod%2Fmedia%2F4eb81f8301e24c309ad4ab1772172d25%2F3000.jpeg</string>
+     </void>
+     <void property="name">
+      <string>Diana Drew</string>
+     </void>
+    </object>
+   </void>
+   <void index="4">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>Sinn Fein</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1985-09-08</string>
+     </void>
+     <void property="homeCounty">
+      <string>Limerick</string>
+     </void>
+     <void property="id">
+      <string>P5</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://focus.independent.ie/thumbor/dNa_A5BMItEirtRD86ZVY8UXYRw=/0x17:5560x3723/960x640/prod-mh-ireland/1656478e-6a6a-4f5f-80de-558300f3296a/338c65da-a142-46d8-9a90-7d90ca9dee1e/1656478e-6a6a-4f5f-80de-558300f3296a.jpg</string>
+     </void>
+     <void property="name">
+      <string>Edward Enright</string>
+     </void>
+    </object>
+   </void>
+   <void index="5">
+    <object class="org.example.model.Politician">
+     <void property="currentParty">
+      <string>gred</string>
+     </void>
+     <void property="dateOfBirth">
+      <string>1978-09-09</string>
+     </void>
+     <void property="homeCounty">
+      <string>med</string>
+     </void>
+     <void property="id">
+      <string>p6</string>
+     </void>
+     <void property="imageUrl">
+      <string>https://www.rte.ie/images/0020f578-500.jpg</string>
+     </void>
+     <void property="name">
+      <string>taras mrasina</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="size">
+   <int>6</int>
+  </void>
+ </object>
+ <object class="org.example.util.SimpleList" id="SimpleList1">
+  <void property="data">
+   <void index="0">
+    <object class="org.example.model.Election" id="Election0">
+     <void id="SimpleList2" property="candidateEntries">
+      <void property="data">
+       <void index="0">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry0">
+         <void property="electionId">
+          <string>E2024</string>
+         </void>
+         <void property="partyAtElection">
+          <string>Green</string>
+         </void>
+         <void property="politicianId">
+          <string>P1</string>
+         </void>
+         <void property="votes">
+          <int>4200</int>
+         </void>
+        </object>
+       </void>
+       <void index="1">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry1">
+         <void property="electionId">
+          <string>E2024</string>
+         </void>
+         <void property="partyAtElection">
+          <string>Labour</string>
+         </void>
+         <void property="politicianId">
+          <string>P2</string>
+         </void>
+         <void property="votes">
+          <int>5100</int>
+         </void>
+        </object>
+       </void>
+       <void index="2">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry2">
+         <void property="electionId">
+          <string>E2024</string>
+         </void>
+         <void property="partyAtElection">
+          <string>Fianna Fail</string>
+         </void>
+         <void property="politicianId">
+          <string>P3</string>
+         </void>
+         <void property="votes">
+          <int>3000</int>
+         </void>
+        </object>
+       </void>
+       <void index="3">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry3">
+         <void property="electionId">
+          <string>E2024</string>
+         </void>
+         <void property="partyAtElection">
+          <string>gor</string>
+         </void>
+         <void property="politicianId">
+          <string>P1</string>
+         </void>
+         <void property="votes">
+          <int>11</int>
+         </void>
+        </object>
+       </void>
+       <void index="4">
+        <object idref="CandidateEntry0"/>
+       </void>
+       <void index="5">
+        <object idref="CandidateEntry1"/>
+       </void>
+       <void index="6">
+        <object idref="CandidateEntry2"/>
+       </void>
+       <void index="7">
+        <object idref="CandidateEntry3"/>
+       </void>
+      </void>
+      <void property="size">
+       <int>8</int>
+      </void>
+     </void>
+     <void property="id">
+      <string>E2024</string>
+     </void>
+     <void property="location">
+      <string>Waterford</string>
+     </void>
+     <void property="seats">
+      <int>3</int>
+     </void>
+     <void property="type">
+      <object class="java.lang.Enum" id="ElectionType0" method="valueOf">
+       <class>org.example.model.ElectionType</class>
+       <string>GENERAL</string>
+      </object>
+     </void>
+     <void property="year">
+      <int>2024</int>
+     </void>
+    </object>
+   </void>
+   <void index="1">
+    <object class="org.example.model.Election" id="Election1">
+     <void id="SimpleList3" property="candidateEntries">
+      <void property="data">
+       <void index="0">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry4">
+         <void property="electionId">
+          <string>E2023</string>
+         </void>
+         <void property="partyAtElection">
+          <string>Fine Gael</string>
+         </void>
+         <void property="politicianId">
+          <string>P4</string>
+         </void>
+         <void property="votes">
+          <int>2800</int>
+         </void>
+        </object>
+       </void>
+       <void index="1">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry5">
+         <void property="electionId">
+          <string>E2023</string>
+         </void>
+         <void property="partyAtElection">
+          <string>Sinn Fein</string>
+         </void>
+         <void property="politicianId">
+          <string>P5</string>
+         </void>
+         <void property="votes">
+          <int>3500</int>
+         </void>
+        </object>
+       </void>
+       <void index="2">
+        <object idref="CandidateEntry4"/>
+       </void>
+       <void index="3">
+        <object idref="CandidateEntry5"/>
+       </void>
+      </void>
+      <void property="size">
+       <int>4</int>
+      </void>
+     </void>
+     <void property="id">
+      <string>E2023</string>
+     </void>
+     <void property="location">
+      <string>Dublin</string>
+     </void>
+     <void property="seats">
+      <int>1</int>
+     </void>
+     <void property="type">
+      <object class="java.lang.Enum" method="valueOf">
+       <class>org.example.model.ElectionType</class>
+       <string>LOCAL</string>
+      </object>
+     </void>
+     <void property="year">
+      <int>2023</int>
+     </void>
+    </object>
+   </void>
+   <void index="2">
+    <object class="org.example.model.Election" id="Election2">
+     <void id="SimpleList4" property="candidateEntries">
+      <void property="data">
+       <void index="0">
+        <object class="org.example.model.CandidateEntry" id="CandidateEntry6">
+         <void property="electionId">
+          <string>e2023</string>
+         </void>
+         <void property="partyAtElection">
+          <string>green</string>
+         </void>
+         <void property="politicianId">
+          <string>P5</string>
+         </void>
+         <void property="votes">
+          <int>11</int>
+         </void>
+        </object>
+       </void>
+       <void index="1">
+        <object idref="CandidateEntry6"/>
+       </void>
+      </void>
+      <void property="size">
+       <int>2</int>
+      </void>
+     </void>
+     <void property="id">
+      <string>e2023</string>
+     </void>
+     <void property="location">
+      <string>waterford</string>
+     </void>
+     <void property="seats">
+      <int>1</int>
+     </void>
+     <void property="type">
+      <object idref="ElectionType0"/>
+     </void>
+     <void property="year">
+      <int>2023</int>
+     </void>
+    </object>
+   </void>
+   <void index="3">
+    <object class="org.example.model.Election">
+     <void property="id">
+      <string>e2021</string>
+     </void>
+     <void property="location">
+      <string>waterford</string>
+     </void>
+     <void property="seats">
+      <int>12</int>
+     </void>
+     <void property="type">
+      <object idref="ElectionType0"/>
+     </void>
+     <void property="year">
+      <int>2021</int>
+     </void>
+    </object>
+   </void>
+   <void index="4">
+    <object class="org.example.model.Election">
+     <void property="id">
+      <string>e2021</string>
+     </void>
+     <void property="location">
+      <string>waterford</string>
+     </void>
+     <void property="seats">
+      <int>11</int>
+     </void>
+     <void property="type">
+      <object idref="ElectionType0"/>
+     </void>
+     <void property="year">
+      <int>2021</int>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="size">
+   <int>5</int>
+  </void>
+ </object>
+ <object class="org.example.util.SimpleList" id="SimpleList5">
+  <void property="data">
+   <void index="0">
+    <object idref="CandidateEntry0"/>
+   </void>
+   <void index="1">
+    <object idref="CandidateEntry1"/>
+   </void>
+   <void index="2">
+    <object idref="CandidateEntry2"/>
+   </void>
+   <void index="3">
+    <object idref="CandidateEntry4"/>
+   </void>
+   <void index="4">
+    <object idref="CandidateEntry5"/>
+   </void>
+   <void index="5">
+    <object idref="CandidateEntry3"/>
+   </void>
+   <void index="6">
+    <object idref="CandidateEntry6"/>
+   </void>
+  </void>
+  <void property="size">
+   <int>7</int>
+  </void>
+ </object>
+</java>
