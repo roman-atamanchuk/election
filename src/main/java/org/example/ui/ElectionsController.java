@@ -13,7 +13,8 @@ import org.example.controller.ElectionController;
 import org.example.model.*;
 
 public class ElectionsController {
-
+    // ---------- SEARCH ----------
+    @FXML private TextField yearSearchField;
     // ---------- LEFT: ELECTION LIST ----------
     @FXML private TableView<Election> electionsTable;
     @FXML private TableColumn<Election, String> elIdCol;
@@ -219,5 +220,43 @@ public class ElectionsController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+    /* ================= SEARCH ================= */
+
+    @FXML
+    private void onSearchByYear() {
+        String text = yearSearchField.getText().trim();
+
+        if (text.isEmpty()) {
+            loadElections();
+            return;
+        }
+
+        try {
+            int year = Integer.parseInt(text);
+
+            electionsTable.getItems().clear();
+            var results = controller.filterElectionsByYear(year);
+
+            for (int i = 0; i < results.size(); i++) {
+                electionsTable.getItems().add(results.get(i));
+            }
+
+            if (!electionsTable.getItems().isEmpty()) {
+                electionsTable.getSelectionModel().select(0);
+            }
+
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Invalid year");
+            alert.setContentText("Year must be a number");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void onClearSearch() {
+        yearSearchField.clear();
+        loadElections();
     }
 }
