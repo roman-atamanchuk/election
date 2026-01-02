@@ -9,6 +9,21 @@
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="org.example.ui.ElectionsController">
 
+    <!-- TOP: SEARCH BY YEAR -->
+    <top>
+        <HBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+
+            <Label text="Search by Year:"/>
+            <TextField fx:id="yearSearchField"
+                       promptText="e.g. 2024"/>
+            <Button text="Search" onAction="#onSearchByYear"/>
+            <Button text="Clear" onAction="#onClearSearch"/>
+        </HBox>
+    </top>
+
     <!-- LEFT: ELECTION LIST -->
     <left>
         <TableView fx:id="electionsTable" prefWidth="360">
